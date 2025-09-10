@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blogs | TechNova</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="images/logo-tehnova.png" alt="Logo TechNova"><h1>TechNova Store</h1></div>
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a class="activo" href="blogs.html">Blogs</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span>Cart (0)</span></div>
+  </header>
+
+  <nav class="nav-secundario" aria-label="Accesos de usuario">
+    <ul>
+      <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+      <li><a href="registrarUsuario.html">Registrar usuario</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="seccion-titulo"><h2>Blog de TechNova</h2><p class="sub">Noticias y tips para estudiar con tecnología.</p></section>
+
+    <!-- Tarjetas de blog: imagen, título y descripción corta -->
+    <section class="blogs">
+      <article class="card">
+        <img src="images/blog-gadgets.jpg" alt="Gadgets para estudiar">
+        <h3>Top 5 gadgets para estudiar en 2025</h3>
+        <p>Ideas económicas que realmente ayudan en clases y proyectos.</p>
+        <a class="btn btn-primario" href="blog-1.html">Leer más</a>
+      </article>
+
+      <article class="card">
+        <img src="images/blog-notebook.jpg" alt="Notebook para programar">
+        <h3>Cómo elegir un notebook para programar</h3>
+        <p>RAM, CPU y almacenamiento… explicado simple para estudiantes.</p>
+        <a class="btn btn-primario" href="blog-2.html">Leer más</a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="inner">
+      <h3 class="footer-brand">TechNova Store</h3>
+      <nav aria-label="Categorías"><ul class="footer-links">
+        <li><a href="categoryx.html">Category X</a></li>
+        <li><a href="categoryy.html">Category Y</a></li>
+        <li><a href="categoryz.html">Category Z</a></li>
+      </ul></nav>
+      <form class="suscripcion" action="#"><label class="sr-only" for="email">Suscríbete</label><input id="email" type="email" placeholder="tu correo" required><button>Suscribirme</button></form>
+    </div>
+  </footer>
+</body>
+</html>

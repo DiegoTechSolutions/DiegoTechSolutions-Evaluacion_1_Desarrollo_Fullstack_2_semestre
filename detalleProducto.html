@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalle de producto | TechNova</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="images/logo-tehnova.png" alt="Logo TechNova">
+      <h1>TechNova Store</h1>
+    </div>
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="activo" href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span>Cart (0)</span></div>
+  </header>
+
+  <!-- Accesos -->
+  <nav class="nav-secundario" aria-label="Accesos de usuario">
+    <ul>
+      <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+      <li><a href="registrarUsuario.html">Registrar usuario</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Layout del detalle (apilado en móvil, 2 columnas en >=700px) -->
+    <section class="detalle">
+      <div class="detalle-img">
+        <img src="images/mouse.png" alt="Mouse Gamer RGB">
+      </div>
+      <div class="detalle-info">
+        <h2>Mouse Gamer RGB</h2>
+        <p class="precio">$15.990</p>
+        <p>Mouse cómodo para estudiar/jugar. Iluminación RGB, 6 botones, cable trenzado.</p>
+        <div class="detalle-btns">
+          <a class="btn btn-secundario" href="productos.html">Volver</a>
+
+          <!-- Botón que añade al carrito (con data-*) -->
+          <button class="btn btn-primario btn-add" type="button"
+                  data-id="P001" data-name="Mouse Gamer RGB" data-price="15990">
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="inner">
+      <h3 class="footer-brand">TechNova Store</h3>
+      <nav aria-label="Categorías">
+        <ul class="footer-links">
+          <li><a href="categoryx.html">Category X</a></li>
+          <li><a href="categoryy.html">Category Y</a></li>
+          <li><a href="categoryz.html">Category Z</a></li>
+        </ul>
+      </nav>
+      <form class="suscripcion" action="#" method="post">
+        <label class="sr-only" for="email">Suscríbete</label>
+        <input id="email" type="email" placeholder="tu correo" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+    </div>
+  </footer>
+
+  <!-- 👉 JS del carrito -->
+  <script src="js/app.js"></script>
+</body>
+</html>

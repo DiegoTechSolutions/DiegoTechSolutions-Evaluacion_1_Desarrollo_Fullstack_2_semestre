@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Productos | TechNova</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header igual -->
+  <header>
+    <div class="logo">
+      <img src="images/logo-tehnova.png" alt="Logo TechNova">
+      <h1>TechNova Store</h1>
+    </div>
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="activo" href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span>Cart (0)</span></div>
+  </header>
+
+  <!-- Accesos usuario a la derecha -->
+  <nav class="nav-secundario" aria-label="Accesos de usuario">
+    <ul>
+      <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+      <li><a href="registrarUsuario.html">Registrar usuario</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="seccion-titulo">
+      <h2>Productos en venta</h2>
+      <p class="sub">Selecciona un producto para ver su detalle o añadir al carrito.</p>
+    </section>
+
+    <!-- Grilla con botones .btn-add -->
+    <section class="productos" aria-label="Listado de productos">
+      <article class="card">
+        <img src="images/mouse.png" alt="Mouse Gamer RGB">
+        <h3>Mouse Gamer RGB</h3>
+        <p class="precio">$15.990</p>
+        <div class="card-acciones">
+          <a class="btn btn-primario" href="detalleProducto.html">Detalle</a>
+          <button class="btn btn-negro btn-add" type="button"
+                  data-id="P001" data-name="Mouse Gamer RGB" data-price="15990">
+            Añadir
+          </button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="images/teclado-mecanico.png" alt="Teclado Mecánico">
+        <h3>Teclado Mecánico</h3>
+        <p class="precio">$34.990</p>
+        <div class="card-acciones">
+          <a class="btn btn-primario" href="detalleProducto.html">Detalle</a>
+          <button class="btn btn-negro btn-add" type="button"
+                  data-id="P002" data-name="Teclado Mecánico" data-price="34990">
+            Añadir
+          </button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="images/audifonos.png" alt="Audífonos Bluetooth">
+        <h3>Audífonos Bluetooth</h3>
+        <p class="precio">$22.500</p>
+        <div class="card-acciones">
+          <a class="btn btn-primario" href="detalleProducto.html">Detalle</a>
+          <button class="btn btn-negro btn-add" type="button"
+                  data-id="P003" data-name="Audífonos Bluetooth" data-price="22500">
+            Añadir
+          </button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="images/smartwatch.png" alt="Smartwatch FitNova">
+        <h3>Smartwatch FitNova</h3>
+        <p class="precio">$29.990</p>
+        <div class="card-acciones">
+          <a class="btn btn-primario" href="detalleProducto.html">Detalle</a>
+          <button class="btn btn-negro btn-add" type="button"
+                  data-id="P004" data-name="Smartwatch FitNova" data-price="29990">
+            Añadir
+          </button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="images/laptop.png" alt="Notebook Ultraliviano">
+        <h3>Notebook Ultraliviano</h3>
+        <p class="precio">$399.990</p>
+        <div class="card-acciones">
+          <a class="btn btn-primario" href="detalleProducto.html">Detalle</a>
+          <button class="btn btn-negro btn-add" type="button"
+                  data-id="P005" data-name="Notebook Ultraliviano" data-price="399990">
+            Añadir
+          </button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="images/silla.png" alt="Silla Gamer Ergonómica">
+        <h3>Silla Gamer Ergonómica</h3>
+        <p class="precio">$149.990</p>
+        <div class="card-acciones">
+          <a class="btn btn-primario" href="detalleProducto.html">Detalle</a>
+          <button class="btn btn-negro btn-add" type="button"
+                  data-id="P006" data-name="Silla Gamer Ergonómica" data-price="149990">
+            Añadir
+          </button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer igual al de index -->
+  <footer>
+    <div class="inner">
+      <h3 class="footer-brand">TechNova Store</h3>
+      <nav aria-label="Categorías">
+        <ul class="footer-links">
+          <li><a href="categoryx.html">Category X</a></li>
+          <li><a href="categoryy.html">Category Y</a></li>
+          <li><a href="categoryz.html">Category Z</a></li>
+        </ul>
+      </nav>
+      <form class="suscripcion" action="#" method="post">
+        <label class="sr-only" for="email">Suscríbete</label>
+        <input id="email" type="email" placeholder="tu correo" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+    </div>
+  </footer>
+
+  <!-- 👉 JS del carrito: escucha .btn-add y actualiza contador -->
+  <script src="js/app.js"></script>
+</body>
+</html>

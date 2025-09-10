@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registrar usuario | TechNova</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="images/logo-tehnova.png" alt="Logo TechNova"><h1>TechNova Store</h1></div>
+    <nav aria-label="Menú principal"><ul class="menu">
+      <li><a href="index.html">Home</a></li><li><a href="productos.html">Productos</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li><li><a href="blogs.html">Blogs</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul></nav>
+    <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span>Cart (0)</span></div>
+  </header>
+
+  <main>
+    <section class="auth">
+      <h2>Registro de usuario</h2>
+      <form class="form" action="#" method="post">
+        <div class="campo">
+          <label for="r-run">RUN (sin puntos ni guion)</label>
+          <input id="r-run" type="text" placeholder="19011022K">
+        </div>
+        <div class="campo">
+          <label for="r-nombre">Nombre</label>
+          <input id="r-nombre" type="text" placeholder="Nombre">
+        </div>
+        <div class="campo">
+          <label for="r-apellidos">Apellidos</label>
+          <input id="r-apellidos" type="text" placeholder="Apellidos">
+        </div>
+        <div class="campo">
+          <label for="r-correo">Correo</label>
+          <input id="r-correo" type="email" placeholder="tu@duoc.cl">
+        </div>
+        <div class="campo">
+          <label for="r-direccion">Dirección</label>
+          <input id="r-direccion" type="text" placeholder="Dirección">
+        </div>
+        <button class="btn btn-primario" type="submit">Crear cuenta</button>
+      </form>
+      <p class="sub">¿Ya tienes cuenta? <a href="iniciarSesion.html">Inicia sesión</a></p>
+    </section>
+  </main>
+
+  <footer><div class="inner"><h3 class="footer-brand">TechNova Store</h3>
+    <nav aria-label="Categorías"><ul class="footer-links"><li><a href="categoryx.html">Category X</a></li><li><a href="categoryy.html">Category Y</a></li><li><a href="categoryz.html">Category Z</a></li></ul></nav>
+    <form class="suscripcion" action="#"><label class="sr-only" for="email">Suscríbete</label><input id="email" type="email" placeholder="tu correo" required><button>Suscribirme</button></form>
+  </div></footer>
+
+</body>
+</html>

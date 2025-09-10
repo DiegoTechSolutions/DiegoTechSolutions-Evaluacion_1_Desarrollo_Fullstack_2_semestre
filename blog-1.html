@@ -2,43 +2,38 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Iniciar sesión | TechNova</title>
+  <title>Top 5 gadgets | TechNova</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
+  <!-- Header compacto -->
   <header>
     <div class="logo"><img src="images/logo-tehnova.png" alt="Logo TechNova"><h1>TechNova Store</h1></div>
     <nav aria-label="Menú principal"><ul class="menu">
-      <li><a href="index.html">Home</a></li><li><a href="productos.html">Productos</a></li>
-      <li><a href="nosotros.html">Nosotros</a></li><li><a href="blogs.html">Blogs</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="index.html">Home</a></li><li><a href="blogs.html" class="activo">Blogs</a></li>
     </ul></nav>
     <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span>Cart (0)</span></div>
   </header>
 
   <main>
-    <section class="auth">
-      <h2>Iniciar sesión</h2>
-      <form class="form" action="#" method="post">
-        <div class="campo">
-          <label for="l-correo">Correo</label>
-          <input id="l-correo" type="email" placeholder="tu@duoc.cl">
-        </div>
-        <div class="campo">
-          <label for="l-pass">Contraseña</label>
-          <input id="l-pass" type="password" placeholder="4 a 10 caracteres">
-        </div>
-        <button class="btn btn-primario" type="submit">Ingresar</button>
-      </form>
-      <p class="sub">¿No tienes cuenta? <a href="registrarUsuario.html">Regístrate</a></p>
-    </section>
+    <article class="post">
+      <h2>Top 5 gadgets para estudiar en 2025</h2>
+      <img class="post-img" src="images/blog-gadgets.jpg" alt="Gadgets para estudiar">
+      <p>Estos son accesorios que usamos a diario y realmente ayudan a concentrarse y organizarse…</p>
+      <ul class="lista-simple">
+        <li>Audífonos con cancelación de ruido</li>
+        <li>Mouse ergonómico</li>
+        <li>Lámpara LED con temperatura ajustable</li>
+        <li>Soporte para notebook</li>
+        <li>Smartwatch económico</li>
+      </ul>
+      <a class="btn btn-secundario" href="blogs.html">Volver</a>
+    </article>
   </main>
 
   <footer><div class="inner"><h3 class="footer-brand">TechNova Store</h3>
     <nav aria-label="Categorías"><ul class="footer-links"><li><a href="categoryx.html">Category X</a></li><li><a href="categoryy.html">Category Y</a></li><li><a href="categoryz.html">Category Z</a></li></ul></nav>
     <form class="suscripcion" action="#"><label class="sr-only" for="email">Suscríbete</label><input id="email" type="email" placeholder="tu correo" required><button>Suscribirme</button></form>
   </div></footer>
-
 </body>
 </html>
