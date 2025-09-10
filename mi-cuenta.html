@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi cuenta | TechNova</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="images/logo-tehnova.png" alt="Logo TechNova"><h1>TechNova Store</h1></div>
+
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+        <!-- El link a Admin aparece por JS si el usuario es Admin/Vendedor -->
+      </ul>
+    </nav>
+
+    <div class="carrito" aria-label="Carrito de compras">
+      <img src="images/carrito-de-compras.png" alt="Carrito">
+      <span aria-live="polite">Cart (0)</span>
+    </div>
+
+    <!-- Sesión / Cuenta -->
+    <div class="cuenta" id="cuenta" aria-label="Cuenta"></div>
+  </header>
+
+  <nav class="nav-secundario" aria-label="Accesos de usuario">
+    <ul>
+      <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+      <li><a href="registrarUsuario.html">Registrar usuario</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="seccion-titulo">
+      <h2>Mi cuenta</h2>
+      <p class="sub">Datos del perfil e historial de compras.</p>
+    </section>
+
+    <section class="form" style="max-width:1100px">
+      <!-- Perfil -->
+      <article class="profile-box" id="account-profile">
+        <!-- Se rellena por JS: nombre, correo, dirección y rol -->
+      </article>
+
+      <!-- Pedidos -->
+      <article class="admin-box">
+        <h3>Mis pedidos</h3>
+        <div class="tabla" id="account-orders">
+          <!-- Se rellena por JS: n° orden, fecha, total -->
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="inner">
+      <h3 class="footer-brand">TechNova Store</h3>
+      <nav aria-label="Categorías">
+        <ul class="footer-links">
+          <li><a href="categoryx.html">Category X</a></li>
+          <li><a href="categoryy.html">Category Y</a></li>
+          <li><a href="categoryz.html">Category Z</a></li>
+        </ul>
+      </nav>
+      <form class="suscripcion" action="#"><label class="sr-only" for="email">Suscríbete</label><input id="email" type="email" placeholder="tu correo" required><button>Suscribirme</button></form>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

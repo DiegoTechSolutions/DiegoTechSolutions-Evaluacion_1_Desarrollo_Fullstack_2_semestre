@@ -1,8 +1,8 @@
-/* =========================================================
+/* 
    BASE (mobile-first)
    - Reset mínimo y tipografía simple
    - Todo parte pensando en celular y luego mejoro con media queries
-========================================================= */
+ */
 *{ box-sizing:border-box; margin:0; padding:0; }
 body{
   font-family: Arial, Helvetica, sans-serif;
@@ -14,11 +14,11 @@ img{ max-width:100%; display:block; } /* imágenes no se salen del contenedor */
 ul{ list-style:none; }                 /* quito viñetas por defecto */
 a{ text-decoration:none; color:inherit; } /* links sin subrayado */
 
-/* =========================================================
+/* 
    HEADER (logo + menú + carrito)
    - Flex para alinear horizontal
    - flex-wrap permite que baje a dos líneas en pantallas chicas
-========================================================= */
+ */
 header{
   background:#1e88e5;  /* azul corporativo */
   color:#fff;
@@ -61,11 +61,11 @@ header{
   font-size:13px;
 }
 
-/* =========================================================
+/* 
    NAV SECUNDARIO (Iniciar sesión / Registrar)
    - Barra separada del header
    - Justificado a la DERECHA (requisito del usuario)
-========================================================= */
+ */
 .nav-secundario{
   background:#e9edf2;
   border-top:1px solid #d7dde5;
@@ -85,11 +85,11 @@ header{
 }
 .nav-secundario a:hover{ background:#f7f9fc; }
 
-/* =========================================================
+/* 
    HERO (mensaje + botones + imagen)
    - En móvil: apilado (texto arriba, imagen abajo)
    - En >=700px: 2 columnas (texto | imagen)
-========================================================= */
+ */
 .hero{
   max-width:1100px;
   margin:16px auto;
@@ -152,11 +152,11 @@ header{
 }
 .btn-negro:hover{ background:#333; }
 
-/* =========================================================
+/* 
    FOOTER (grid ordenado)
    - Desktop: 2 columnas [brand | links] y la suscripción debajo de brand
    - Móvil: apilado y centrado
-========================================================= */
+ */
 footer{
   background:#222; color:#ddd; margin-top:20px;
 }
@@ -214,11 +214,11 @@ a:focus-visible, button:focus-visible, input:focus-visible{
   outline:2px solid #1e88e5; outline-offset:2px;
 }
 
-/* =========================================================
+/* 
    BREAKPOINTS (mejoras progresivas)
-========================================================= */
+ */
 
-/* >= 700px: el hero pasa a 2 columnas (texto | imagen) */
+/*  700px: el hero pasa a 2 columnas (texto | imagen) */
 @media (min-width:700px){
   .hero{
     grid-template-columns: 1.2fr 1fr;
@@ -226,14 +226,14 @@ a:focus-visible, button:focus-visible, input:focus-visible{
   }
 }
 
-/* >= 1000px: productos con 3 columnas */
+/*  1000px: productos con 3 columnas */
 @media (min-width:1000px){
   .productos{
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* <= 700px: footer apilado y centrado (móvil) */
+/*  700px: footer apilado y centrado (móvil) */
 @media (max-width:700px){
   footer .inner{
     grid-template-columns: 1fr;
@@ -248,14 +248,14 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 }
 
 
-/* ===== títulos y texto de sección ===== */
+/*  títulos y texto de sección  */
 .seccion-titulo{ max-width:1100px; margin:16px auto; padding:0 16px; }
 .seccion-titulo .sub{ color:#555; }
 
-/* ===== ajustes tarjetas productos ===== */
+/*  ajustes tarjetas productos  */
 .card-acciones{ display:flex; gap:8px; }
 
-/* ===== detalle producto ===== */
+/*  detalle producto  */
 .detalle{
   max-width:1100px; margin:16px auto; padding:16px;
   background:#fff; border:1px solid #e3e7ee; border-radius:10px;
@@ -269,7 +269,7 @@ a:focus-visible, button:focus-visible, input:focus-visible{
   .detalle{ grid-template-columns: 1fr 1.2fr; align-items:start; }
 }
 
-/* ===== formularios básicos ===== */
+/*  formularios básicos  */
 .form{
   max-width:700px; margin:16px auto; padding:16px;
   background:#fff; border:1px solid #e3e7ee; border-radius:10px;
@@ -338,7 +338,7 @@ a:focus-visible, button:focus-visible, input:focus-visible{
   .tabla.cart .t-row > span:nth-child(1){ grid-column: 1 / -1; } /* Producto ancho */
 }
 
-/* ===== mensajes de error sencillos (presentación clara) ===== */
+/*  mensajes de error sencillos (presentación clara)  */
 .error-msg{
   color:#c62828;         /* rojo suave */
   font-size: 14px;
@@ -350,3 +350,31 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 }
 
 
+/*  Cuenta / Sesión en header  */
+.cuenta{
+  display:flex; align-items:center; gap:8px; color:#fff; flex-wrap:wrap;
+}
+.cuenta .user{
+  display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.15);
+  padding:6px 10px; border-radius:999px;
+}
+.cuenta .user img{ width:22px; height:22px; border-radius:50%; background:#fff; }
+.cuenta .email{ font-size:14px; }
+.cuenta .acciones{ display:flex; gap:6px; }
+.btn-link{
+  background:#1565c0; color:#fff; padding:6px 10px; border-radius:6px;
+}
+.btn-link:hover{ background:#0d63b0; }
+
+
+/* Cuenta / Sesión en header */
+.cuenta{ display:flex; align-items:center; gap:8px; color:#fff; flex-wrap:wrap; }
+.cuenta .user{ display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.15); padding:6px 10px; border-radius:999px; }
+.cuenta .user img{ width:22px; height:22px; border-radius:50%; background:#fff; }
+.cuenta .email{ font-size:14px; }
+.cuenta .acciones{ display:flex; gap:6px; }
+.btn-link{ background:#1565c0; color:#fff; padding:6px 10px; border-radius:6px; }
+.btn-link:hover{ background:#0d63b0; }
+
+/* Perfil */
+.profile-box{ background:#fff; border:1px solid #e3e7ee; border-radius:10px; padding:12px; margin-bottom:12px; }

@@ -1,61 +1,57 @@
-/* =========================================================
-   TechNova - App JS (nivel alumno, bien comentado)
-   - Persistencia con localStorage (carrito, usuarios, productos, órdenes, sesión)
-   - Carrito: añadir, listar, sumar/restar, eliminar, vaciar, comprar
-   - Autenticación: registro, login, sesión
-   - Admin: render de productos, usuarios y pedidos; alta de productos/usuarios
-========================================================= */
+/* ---------------------------------
+   TechNova - App JS (limpio)
+   - Persistencia con localStorage
+   - Carrito: añadir, listar, +/- , eliminar, vaciar, comprar
+   - Autenticación: registro, login, sesión (header visible)
+   - Admin: productos, usuarios, pedidos (con guard de rol)
+   - Mi cuenta: perfil + historial
+----------------------------------*/
 
-/* ---------- Claves de storage ---------- */
-const KEYS = {
-  CART: 'cart',
-  USERS: 'users',
-  PRODUCTS: 'products',
-  ORDERS: 'orders',
-  SESSION: 'session',   // { email }
-};
+/* ===== Claves de storage ===== */
+const KEYS = { CART:'cart', USERS:'users', PRODUCTS:'products', ORDERS:'orders', SESSION:'session' };
 
-/* ---------- Utilidades simples ---------- */
+/* ===== Utils JSON/localStorage ===== */
 function readJSON(key, fallback){
   try{
     const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : (fallback ?? null);
   }catch(e){ return fallback ?? null; }
 }
-function writeJSON(key, value){
-  localStorage.setItem(key, JSON.stringify(value));
+function writeJSON(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
+
+/* ===== Sesión ===== */
+function getSession(){ return readJSON(KEYS.SESSION, null); }
+function setSession(email){ writeJSON(KEYS.SESSION, { email }); }
+function clearSession(){ localStorage.removeItem(KEYS.SESSION); }
+function currentUser(){
+  const s = getSession();
+  if(!s) return null;
+  const users = readJSON(KEYS.USERS, []);
+  return users.find(u => u.email.toLowerCase() === s.email.toLowerCase()) || null;
 }
 
-/* ---------- Semillas (primera vez) ---------- */
+/* ===== Semillas (primera vez) ===== */
 function seedProducts(){
   const exists = readJSON(KEYS.PRODUCTS);
   if(exists && Array.isArray(exists) && exists.length) return;
-  const init = [
-    { id:'P001', name:'Mouse Gamer RGB', price:15990, stock:25, img:'images/mouse.png' },
-    { id:'P002', name:'Teclado Mecánico', price:34990, stock:12, img:'images/teclado-mecanico.png' },
-    { id:'P003', name:'Audífonos Bluetooth', price:22500, stock:30, img:'images/audifonos.png' },
-    { id:'P004', name:'Smartwatch FitNova', price:29990, stock:18, img:'images/smartwatch.png' },
-    { id:'P005', name:'Notebook Ultraliviano', price:399990, stock:7, img:'images/laptop.png' },
-    { id:'P006', name:'Silla Gamer Ergonómica', price:149990, stock:10, img:'images/silla.png' },
-  ];
-  writeJSON(KEYS.PRODUCTS, init);
+  writeJSON(KEYS.PRODUCTS, [
+    { id:'P001', name:'Mouse Gamer RGB',       price:15990,  stock:25, img:'images/mouse.png' },
+    { id:'P002', name:'Teclado Mecánico',      price:34990,  stock:12, img:'images/teclado-mecanico.png' },
+    { id:'P003', name:'Audífonos Bluetooth',   price:22500,  stock:30, img:'images/audifonos.png' },
+    { id:'P004', name:'Smartwatch FitNova',    price:29990,  stock:18, img:'images/smartwatch.png' },
+    { id:'P005', name:'Notebook Ultraliviano', price:399990, stock:7,  img:'images/laptop.png' },
+    { id:'P006', name:'Silla Gamer Ergonómica',price:149990, stock:10, img:'images/silla.png' },
+  ]);
 }
 function seedUsers(){
   const exists = readJSON(KEYS.USERS);
   if(exists) return;
-  // usuario admin de ejemplo (clave corta para demo)
-  const init = [
+  writeJSON(KEYS.USERS, [
     { run:'19011022K', nombre:'Admin', apellidos:'TechNova', email:'admin@duoc.cl', pass:'admin', tipo:'Administrador', direccion:'Sede Central' }
-  ];
-  writeJSON(KEYS.USERS, init);
+  ]);
 }
 
-/* ---------- Sesión ---------- */
-function getSession(){ return readJSON(KEYS.SESSION, null); }
-function setSession(email){ writeJSON(KEYS.SESSION, { email }); }
-function clearSession(){ localStorage.removeItem(KEYS.SESSION); }
-
-/* ---------- Carrito ---------- */
+/* ===== Carrito ===== */
 function getCart(){ return readJSON(KEYS.CART, []); }
 function saveCart(cart){ writeJSON(KEYS.CART, cart); }
 
@@ -69,8 +65,7 @@ function updateCartCounter(){
 function addToCart({ id, name, price }){
   const cart = getCart();
   const found = cart.find(p => p.id === id);
-  if(found){ found.qty += 1; }
-  else{ cart.push({ id, name, price, qty:1 }); }
+  if(found){ found.qty += 1; } else { cart.push({ id, name, price, qty:1 }); }
   saveCart(cart);
   updateCartCounter();
   alert(`${name} añadido al carrito ✅`);
@@ -102,7 +97,7 @@ function clearCart(){
   renderCart();
 }
 
-/* ---------- Formato CLP ---------- */
+/* ===== Formato CLP ===== */
 function formatCLP(n){
   try{
     return new Intl.NumberFormat('es-CL', { style:'currency', currency:'CLP', maximumFractionDigits:0 }).format(n);
@@ -112,7 +107,7 @@ function formatCLP(n){
 }
 function cartTotal(cart){ return cart.reduce((acc, it) => acc + it.price * it.qty, 0); }
 
-/* ---------- Check-out / Orden ---------- */
+/* ===== Compra / Orden ===== */
 function createOrder(){
   const session = getSession();
   if(!session){
@@ -120,11 +115,11 @@ function createOrder(){
     window.location.href = 'iniciarSesion.html';
     return null;
   }
-  const user = (readJSON(KEYS.USERS, [])).find(u => u.email === session.email);
+  const user = currentUser();
   const cart = getCart();
   if(!cart.length){ alert('Tu carrito está vacío.'); return null; }
 
-  // Validar stock simple
+  // validar stock
   const products = readJSON(KEYS.PRODUCTS, []);
   for(const it of cart){
     const p = products.find(x => x.id === it.id);
@@ -133,15 +128,14 @@ function createOrder(){
       return null;
     }
   }
-
-  // Descontar stock
+  // descontar
   for(const it of cart){
     const p = products.find(x => x.id === it.id);
     p.stock -= it.qty;
   }
   writeJSON(KEYS.PRODUCTS, products);
 
-  // Crear orden
+  // crear orden
   const order = {
     id: 'ORD-' + Date.now(),
     date: new Date().toLocaleString('es-CL'),
@@ -154,21 +148,21 @@ function createOrder(){
   orders.push(order);
   writeJSON(KEYS.ORDERS, orders);
 
-  // Vaciar carrito
+  // vaciar carrito
   saveCart([]);
   updateCartCounter();
   return order;
 }
 
-/* ---------- Render Carrito (carrito.html) ---------- */
+/* ===== Carrito: render (solo en carrito.html) ===== */
 function renderCart(){
   const body = document.getElementById('cart-body');
   const empty = document.getElementById('cart-empty');
   const table = document.getElementById('cart-table');
   const totalEl = document.getElementById('cart-total');
   const receipt = document.getElementById('receipt');
+  if(!body || !empty || !table || !totalEl) return;
 
-  if(!body || !empty || !table || !totalEl) return; // no estoy en carrito.html
   if(receipt) receipt.style.display = 'none';
 
   const cart = getCart();
@@ -217,7 +211,7 @@ function renderCart(){
   };
 }
 
-/* ---------- Comprobante / Recibo ---------- */
+/* ===== Comprobante ===== */
 function renderReceipt(order){
   const receipt = document.getElementById('receipt');
   if(!receipt) return;
@@ -242,7 +236,6 @@ function renderReceipt(order){
       </div>
     </div>
   `;
-  // Descargar como .txt simple
   const btn = document.getElementById('btn-descarga');
   if(btn){
     btn.onclick = ()=>{
@@ -261,27 +254,21 @@ function renderReceipt(order){
       URL.revokeObjectURL(url);
     };
   }
-
-  // refrescar vista del carrito vacío
-  renderCart();
+  renderCart(); // refresca tabla (queda vacía tras comprar)
 }
 
-/* ---------- Botones .btn-add (productos/detalle) ---------- */
+/* ===== Botones .btn-add ===== */
 function setupAddButtons(){
   document.querySelectorAll('.btn-add').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      const id = btn.dataset.id;
-      const name = btn.dataset.name;
-      const price = Number(btn.dataset.price || 0);
+      const id = btn.dataset.id, name = btn.dataset.name, price = Number(btn.dataset.price || 0);
       if(!id || !name){ return alert('Producto inválido'); }
       addToCart({ id, name, price });
     });
   });
 }
 
-/* =========================================================
-   VALIDACIONES (reutilizo lo que ya hicimos)
-========================================================= */
+/* ===== Validaciones (reutilizadas) ===== */
 function byId(id){ return document.getElementById(id); }
 function clearErrors(form){
   form.querySelectorAll('.error-msg').forEach(e => e.remove());
@@ -308,7 +295,7 @@ function getFormByInputId(inputId){
   return el ? el.closest('form') : null;
 }
 
-/* ---------- Contacto ---------- */
+/* ===== Contacto ===== */
 (function setupContacto(){
   const f = getFormByInputId('c-nombre') || getFormByInputId('c-correo') || getFormByInputId('c-comentario');
   if(!f) return;
@@ -323,7 +310,7 @@ function getFormByInputId(inputId){
   });
 })();
 
-/* ---------- Login ---------- */
+/* ===== Login ===== */
 (function setupLogin(){
   const f = getFormByInputId('l-correo') || getFormByInputId('l-pass');
   if(!f) return;
@@ -333,18 +320,16 @@ function getFormByInputId(inputId){
     if(!correo || !isAllowedEmail(correo.value)){ ok=false; showError(correo||f,'Correo @gmail.com o @duoc.cl'); }
     if(!pass || !isValidPass(pass.value)){ ok=false; showError(pass||f,'Contraseña 4 a 10.'); }
     if(!ok){ e.preventDefault(); return; }
-    // validar contra usuarios guardados
     const users = readJSON(KEYS.USERS, []);
     const found = users.find(u => u.email.toLowerCase()===correo.value.toLowerCase() && u.pass===pass.value);
-    if(!found){ e.preventDefault(); alert('Credenciales inválidas'); return; }
+    if(!found){ e.preventDefault(); return alert('Credenciales inválidas'); }
     setSession(found.email);
     alert('Inicio de sesión ok ✅');
-    // redirige al carrito si venía de comprar, si no, a Home
     window.location.href = 'index.html';
   });
 })();
 
-/* ---------- Registro ---------- */
+/* ===== Registro ===== */
 (function setupRegistro(){
   const f = getFormByInputId('r-run') || getFormByInputId('r-correo');
   if(!f) return;
@@ -380,21 +365,14 @@ function getFormByInputId(inputId){
   });
 })();
 
-/* ---------- Admin: render datos (si estoy en admin.html) ---------- */
+/* ===== Admin: render ===== */
 function renderAdmin(){
   const usersEl = document.getElementById('admin-users');
   const prodsEl = document.getElementById('admin-products');
   const ordsEl  = document.getElementById('admin-orders');
   if(!usersEl && !prodsEl && !ordsEl) return;
 
-  // Protegemos admin (si quieres)
-  const sess = getSession();
-  if(!sess){
-    // si no hay sesión, no bloqueo para revisión, pero podrías redirigir:
-    // window.location.href='iniciarSesion.html';
-  }
-
-  // Render usuarios
+  // Usuarios
   if(usersEl){
     const users = readJSON(KEYS.USERS, []);
     usersEl.innerHTML = `
@@ -404,8 +382,7 @@ function renderAdmin(){
       `).join('')}
     `;
   }
-
-  // Render productos
+  // Productos
   if(prodsEl){
     const prods = readJSON(KEYS.PRODUCTS, []);
     prodsEl.innerHTML = `
@@ -415,8 +392,7 @@ function renderAdmin(){
       `).join('')}
     `;
   }
-
-  // Render órdenes
+  // Órdenes
   if(ordsEl){
     const ords = readJSON(KEYS.ORDERS, []);
     ordsEl.innerHTML = `
@@ -428,7 +404,7 @@ function renderAdmin(){
   }
 }
 
-/* ---------- Admin: formularios (crear producto/usuario) ---------- */
+/* ===== Admin: formularios ===== */
 function setupAdminForms(){
   const fp = document.getElementById('form-producto');
   if(fp){
@@ -438,9 +414,9 @@ function setupAdminForms(){
       clearErrors(fp);
       if(!id.value.trim()) return showError(id,'Código requerido');
       if(!nombre.value.trim()) return showError(nombre,'Nombre requerido');
-      const pr = Number(precio.value); const st= Number(stock.value);
+      const pr = Number(precio.value), st= Number(stock.value);
       if(isNaN(pr) || pr<=0) return showError(precio,'Precio > 0');
-      if(isNaN(st) || st<0) return showError(stock,'Stock >= 0');
+      if(isNaN(st) || st<0)  return showError(stock,'Stock >= 0');
       const prods = readJSON(KEYS.PRODUCTS, []);
       const idx = prods.findIndex(p=>p.id===id.value.trim());
       const data = { id:id.value.trim(), name:nombre.value.trim(), price:pr, stock:st, img:'images/placeholder.png', categoria:cat.value };
@@ -460,8 +436,8 @@ function setupAdminForms(){
             correo=byId('u-correo'), tipo=byId('u-tipo');
       clearErrors(fu);
       if(!isValidRUNSimple(run.value)) return showError(run,'RUN inválido');
-      if(!nombre.value.trim()) return showError(nombre,'Nombre requerido');
-      if(!ape.value.trim()) return showError(ape,'Apellidos requeridos');
+      if(!nombre.value.trim())       return showError(nombre,'Nombre requerido');
+      if(!ape.value.trim())          return showError(ape,'Apellidos requeridos');
       if(!isAllowedEmail(correo.value)) return showError(correo,'Correo @gmail.com o @duoc.cl');
       const users = readJSON(KEYS.USERS, []);
       if(users.find(u=>u.email.toLowerCase()===correo.value.trim().toLowerCase())) return showError(correo,'Correo ya existe');
@@ -474,7 +450,110 @@ function setupAdminForms(){
   }
 }
 
-/* ---------- Al cargar la página ---------- */
+/* ===== Mi cuenta: render ===== */
+function renderAccountPage(){
+  const prof = document.getElementById('account-profile');
+  const out  = document.getElementById('account-orders');
+  if(!prof || !out) return;
+
+  const user = currentUser();
+  if(!user){
+    alert('Debes iniciar sesión.');
+    window.location.href = 'iniciarSesion.html';
+    return;
+  }
+
+  prof.innerHTML = `
+    <h3>Perfil</h3>
+    <p><strong>Nombre:</strong> ${user.nombre || '-'} ${user.apellidos || ''}</p>
+    <p><strong>Correo:</strong> ${user.email}</p>
+    <p><strong>Dirección:</strong> ${user.direccion || '-'}</p>
+    <p><strong>Rol:</strong> ${user.tipo}</p>
+  `;
+
+  const ords = readJSON(KEYS.ORDERS, []).filter(o => o.userEmail.toLowerCase() === user.email.toLowerCase());
+  if(!ords.length){
+    out.innerHTML = `<p class="sub">No tienes pedidos aún.</p>`;
+    return;
+  }
+  out.innerHTML = `
+    <div class="t-row t-head"><span>Orden</span><span>Fecha</span><span>Total</span><span>Acción</span></div>
+    ${ords.map(o => `
+      <div class="t-row">
+        <span>${o.id}</span>
+        <span>${o.date}</span>
+        <span>${formatCLP(o.total)}</span>
+        <span><a class="btn btn-secundario" href="carrito.html#${o.id}">Ver detalle</a></span>
+      </div>
+    `).join('')}
+  `;
+}
+
+/* ===== Header: sesión visible (hola nombre, mi cuenta, logout, admin si rol) ===== */
+function renderSessionUI(){
+  const box = document.getElementById('cuenta');
+  const menu = document.querySelector('nav ul.menu');
+  if(!box || !menu) return;
+
+  const user = currentUser();
+
+  // limpia posible Admin duplicado
+  const existingAdmin = menu.querySelector('a[href="admin.html"]');
+  if(existingAdmin) existingAdmin.parentElement.remove();
+
+  if(!user){
+    box.innerHTML = `
+      <div class="acciones">
+        <a class="btn-link" href="iniciarSesion.html">Iniciar sesión</a>
+        <a class="btn-link" href="registrarUsuario.html">Registrarse</a>
+      </div>
+    `;
+    return;
+  }
+
+  const nombreCorto = user.nombre ? user.nombre.split(' ')[0] : '';
+  box.innerHTML = `
+    <div class="user">
+      <img src="images/user.png" alt="Cuenta">
+      <span class="email">Hola, <strong>${nombreCorto || user.email}</strong></span>
+    </div>
+    <div class="acciones">
+      <a class="btn-link" href="mi-cuenta.html">Mi cuenta</a>
+      <button id="btn-logout" class="btn-link" type="button">Cerrar sesión</button>
+    </div>
+  `;
+
+  if(user.tipo === 'Administrador' || user.tipo === 'Vendedor'){
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="admin.html">Admin</a>`;
+    menu.appendChild(li);
+  }
+
+  const btnLogout = document.getElementById('btn-logout');
+  if(btnLogout){
+    btnLogout.onclick = ()=>{
+      clearSession();
+      alert('Sesión cerrada');
+      renderSessionUI();
+      if(location.pathname.endsWith('mi-cuenta.html') || location.pathname.endsWith('admin.html')){
+        location.href = 'iniciarSesion.html';
+      }
+    };
+  }
+}
+
+/* ===== Guard de admin ===== */
+function enforceAdminGuard(){
+  const isAdminPage = /(^|\/)admin\.html(\?|#|$)/i.test(window.location.pathname) || window.location.href.endsWith('admin.html');
+  if(!isAdminPage) return;
+  const user = currentUser();
+  if(!user || !(user.tipo === 'Administrador' || user.tipo === 'Vendedor')){
+    alert('Acceso restringido al panel de administración.');
+    window.location.href = 'iniciarSesion.html';
+  }
+}
+
+/* ===== DOM Ready ===== */
 document.addEventListener('DOMContentLoaded', ()=>{
   seedProducts();
   seedUsers();
@@ -484,7 +563,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   renderAdmin();
   setupAdminForms();
 
-  // Hacer clic en el badge del carrito te lleva a carrito.html (si no está envuelto en <a>)
+  renderSessionUI();
+  enforceAdminGuard();
+  renderAccountPage();
+
   const cartBadge = document.querySelector('.carrito');
   if(cartBadge && !cartBadge.closest('a')){
     cartBadge.style.cursor = 'pointer';
