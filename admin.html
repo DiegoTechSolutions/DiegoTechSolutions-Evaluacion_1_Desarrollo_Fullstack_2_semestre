@@ -9,44 +9,42 @@
 
   <header>
     <div class="logo"><img src="images/logo-tehnova.png" alt="Logo TechNova"><h1>Admin TechNova</h1></div>
-    <nav aria-label="Menú principal"><ul class="menu">
-      <li><a href="index.html">Tienda</a></li>
-      <li><a class="activo" href="admin.html">Administrador</a></li>
-    </ul></nav>
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a href="index.html">Tienda</a></li>
+        <li><a class="activo" href="admin.html">Administrador</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+      </ul>
+    </nav>
     <div class="carrito" aria-hidden="true"><img src="images/carrito-de-compras.png" alt=""><span>Admin</span></div>
   </header>
 
   <main class="admin">
-    <!-- Menú vertical (izquierda) -->
     <aside class="admin-menu">
       <h3>Menú</h3>
       <ul>
         <li><a href="#productos">Productos</a></li>
         <li><a href="#usuarios">Usuarios</a></li>
+        <li><a href="#pedidos">Pedidos</a></li>
       </ul>
     </aside>
 
-    <!-- Contenido (derecha) -->
     <section class="admin-content">
       <h2>Panel de administración</h2>
-      <p class="sub">Gestiona productos y usuarios de la tienda.</p>
+      <p class="sub">Gestiona productos, usuarios y pedidos generados en la tienda.</p>
 
       <!-- Productos -->
       <article id="productos" class="admin-box">
         <h3>Productos</h3>
 
         <h4>Listado</h4>
-        <div class="tabla">
-          <div class="t-row t-head"><span>Código</span><span>Nombre</span><span>Precio</span><span>Stock</span></div>
-          <div class="t-row"><span>P-001</span><span>Mouse Gamer RGB</span><span>$15.990</span><span>25</span></div>
-          <div class="t-row"><span>P-002</span><span>Teclado Mecánico</span><span>$34.990</span><span>12</span></div>
-        </div>
+        <div id="admin-products" class="tabla"></div>
 
         <h4>Nuevo / Editar</h4>
-        <form class="form form-grid" action="#" method="post">
+        <form id="form-producto" class="form form-grid" action="#">
           <div class="campo"><label for="p-codigo">Código</label><input id="p-codigo" type="text" placeholder="P-003"></div>
           <div class="campo"><label for="p-nombre">Nombre</label><input id="p-nombre" type="text" placeholder="Nombre"></div>
-          <div class="campo"><label for="p-precio">Precio</label><input id="p-precio" type="number" step="0.01" placeholder="0"></div>
+          <div class="campo"><label for="p-precio">Precio</label><input id="p-precio" type="number" step="1" placeholder="0"></div>
           <div class="campo"><label for="p-stock">Stock</label><input id="p-stock" type="number" placeholder="0"></div>
           <div class="campo"><label for="p-categoria">Categoría</label>
             <select id="p-categoria"><option>Accesorios</option><option>Audio</option><option>Notebook</option></select>
@@ -60,13 +58,10 @@
         <h3>Usuarios</h3>
 
         <h4>Listado</h4>
-        <div class="tabla">
-          <div class="t-row t-head"><span>RUN</span><span>Nombre</span><span>Correo</span><span>Tipo</span></div>
-          <div class="t-row"><span>19011022K</span><span>Juan Pérez</span><span>juan@duoc.cl</span><span>Administrador</span></div>
-        </div>
+        <div id="admin-users" class="tabla"></div>
 
         <h4>Nuevo</h4>
-        <form class="form form-grid" action="#" method="post">
+        <form id="form-usuario" class="form form-grid" action="#">
           <div class="campo"><label for="u-run">RUN</label><input id="u-run" type="text" placeholder="19011022K"></div>
           <div class="campo"><label for="u-nombre">Nombre</label><input id="u-nombre" type="text" placeholder="Nombre"></div>
           <div class="campo"><label for="u-apellidos">Apellidos</label><input id="u-apellidos" type="text" placeholder="Apellidos"></div>
@@ -76,6 +71,12 @@
           </div>
           <button class="btn btn-primario" type="submit">Guardar usuario</button>
         </form>
+      </article>
+
+      <!-- Pedidos -->
+      <article id="pedidos" class="admin-box">
+        <h3>Pedidos</h3>
+        <div id="admin-orders" class="tabla"></div>
       </article>
     </section>
   </main>
@@ -88,5 +89,6 @@
     </div>
   </footer>
 
+  <script src="js/app.js"></script>
 </body>
 </html>

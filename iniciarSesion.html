@@ -13,6 +13,7 @@
       <li><a href="index.html">Home</a></li><li><a href="productos.html">Productos</a></li>
       <li><a href="nosotros.html">Nosotros</a></li><li><a href="blogs.html">Blogs</a></li>
       <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="carrito.html">Carrito</a></li>
     </ul></nav>
     <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span>Cart (0)</span></div>
   </header>
@@ -20,15 +21,9 @@
   <main>
     <section class="auth">
       <h2>Iniciar sesión</h2>
-      <form class="form" action="#" method="post">
-        <div class="campo">
-          <label for="l-correo">Correo</label>
-          <input id="l-correo" type="email" placeholder="tu@duoc.cl">
-        </div>
-        <div class="campo">
-          <label for="l-pass">Contraseña</label>
-          <input id="l-pass" type="password" placeholder="4 a 10 caracteres">
-        </div>
+      <form class="form" action="#">
+        <div class="campo"><label for="l-correo">Correo</label><input id="l-correo" type="email" placeholder="tu@duoc.cl" required></div>
+        <div class="campo"><label for="l-pass">Contraseña (4 a 10)</label><input id="l-pass" type="password" minlength="4" maxlength="10" placeholder="******" required></div>
         <button class="btn btn-primario" type="submit">Ingresar</button>
       </form>
       <p class="sub">¿No tienes cuenta? <a href="registrarUsuario.html">Regístrate</a></p>
@@ -40,5 +35,6 @@
     <form class="suscripcion" action="#"><label class="sr-only" for="email">Suscríbete</label><input id="email" type="email" placeholder="tu correo" required><button>Suscribirme</button></form>
   </div></footer>
 
+  <script src="js/app.js"></script>
 </body>
 </html>

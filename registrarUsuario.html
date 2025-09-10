@@ -13,6 +13,7 @@
       <li><a href="index.html">Home</a></li><li><a href="productos.html">Productos</a></li>
       <li><a href="nosotros.html">Nosotros</a></li><li><a href="blogs.html">Blogs</a></li>
       <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="carrito.html">Carrito</a></li>
     </ul></nav>
     <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span>Cart (0)</span></div>
   </header>
@@ -20,27 +21,13 @@
   <main>
     <section class="auth">
       <h2>Registro de usuario</h2>
-      <form class="form" action="#" method="post">
-        <div class="campo">
-          <label for="r-run">RUN (sin puntos ni guion)</label>
-          <input id="r-run" type="text" placeholder="19011022K">
-        </div>
-        <div class="campo">
-          <label for="r-nombre">Nombre</label>
-          <input id="r-nombre" type="text" placeholder="Nombre">
-        </div>
-        <div class="campo">
-          <label for="r-apellidos">Apellidos</label>
-          <input id="r-apellidos" type="text" placeholder="Apellidos">
-        </div>
-        <div class="campo">
-          <label for="r-correo">Correo</label>
-          <input id="r-correo" type="email" placeholder="tu@duoc.cl">
-        </div>
-        <div class="campo">
-          <label for="r-direccion">Dirección</label>
-          <input id="r-direccion" type="text" placeholder="Dirección">
-        </div>
+      <form class="form" action="#">
+        <div class="campo"><label for="r-run">RUN (sin puntos ni guion)</label><input id="r-run" type="text" placeholder="19011022K" required></div>
+        <div class="campo"><label for="r-nombre">Nombre</label><input id="r-nombre" type="text" placeholder="Nombre" required></div>
+        <div class="campo"><label for="r-apellidos">Apellidos</label><input id="r-apellidos" type="text" placeholder="Apellidos" required></div>
+        <div class="campo"><label for="r-correo">Correo</label><input id="r-correo" type="email" placeholder="tu@duoc.cl" required></div>
+        <div class="campo"><label for="r-pass">Contraseña (4 a 10)</label><input id="r-pass" type="password" minlength="4" maxlength="10" placeholder="******" required></div>
+        <div class="campo"><label for="r-direccion">Dirección</label><input id="r-direccion" type="text" placeholder="Dirección" required></div>
         <button class="btn btn-primario" type="submit">Crear cuenta</button>
       </form>
       <p class="sub">¿Ya tienes cuenta? <a href="iniciarSesion.html">Inicia sesión</a></p>
@@ -52,5 +39,6 @@
     <form class="suscripcion" action="#"><label class="sr-only" for="email">Suscríbete</label><input id="email" type="email" placeholder="tu correo" required><button>Suscribirme</button></form>
   </div></footer>
 
+  <script src="js/app.js"></script>
 </body>
 </html>

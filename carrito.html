@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Carrito | TechNova</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- ===== HEADER (igual al resto) ===== -->
   <header>
-    <div class="logo">
-      <img src="images/logo-tehnova.png" alt="Logo TechNova">
-      <h1>TechNova Store</h1>
-    </div>
-
+    <div class="logo"><img src="images/logo-tehnova.png" alt="Logo TechNova"><h1>TechNova Store</h1></div>
     <nav aria-label="Menú principal">
       <ul class="menu">
         <li><a href="index.html">Home</a></li>
@@ -25,76 +19,44 @@
         <li><a class="activo" href="carrito.html">Carrito</a></li>
       </ul>
     </nav>
-
-    <div class="carrito" aria-label="Carrito de compras">
-      <img src="images/carrito-de-compras.png" alt="Carrito">
-      <span aria-live="polite">Cart (0)</span>
-    </div>
+    <div class="carrito"><img src="images/carrito-de-compras.png" alt="Carrito"><span aria-live="polite">Cart (0)</span></div>
   </header>
 
-  <!-- ===== NAV SECUNDARIO (derecha) ===== -->
   <nav class="nav-secundario" aria-label="Accesos de usuario">
-    <ul>
-      <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
-      <li><a href="registrarUsuario.html">Registrar usuario</a></li>
-    </ul>
+    <ul><li><a href="iniciarSesion.html">Iniciar sesión</a></li><li><a href="registrarUsuario.html">Registrar usuario</a></li></ul>
   </nav>
 
   <main>
-    <!-- Título de página -->
-    <section class="seccion-titulo">
-      <h2>Tu carrito</h2>
-      <p class="sub">Revisa tus productos. Puedes sumar, restar o eliminar.</p>
-    </section>
+    <section class="seccion-titulo"><h2>Tu carrito</h2><p class="sub">Puedes sumar, restar, eliminar o finalizar la compra.</p></section>
 
-    <!-- Contenedor del carrito -->
     <section class="form" style="max-width:1100px">
-      <!-- Mensaje si está vacío -->
       <p id="cart-empty" style="display:none">Tu carrito está vacío. <a class="btn btn-secundario" href="productos.html">Ver productos</a></p>
 
-      <!-- “Tabla” simple usando las clases que ya tienes -->
       <div class="tabla cart" id="cart-table" style="display:none">
-        <div class="t-row t-head">
-          <span>Producto</span>
-          <span>Precio</span>
-          <span>Cantidad</span>
-          <span>Subtotal</span>
-          <span>Acciones</span>
-        </div>
-        <!-- Aquí se inyectan las filas con JS -->
+        <div class="t-row t-head"><span>Producto</span><span>Precio</span><span>Cantidad</span><span>Subtotal</span><span>Acciones</span></div>
         <div id="cart-body"></div>
       </div>
 
-      <!-- Total + acciones generales -->
       <div class="detalle-btns" style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
         <strong>Total: <span id="cart-total">$0</span></strong>
         <button id="cart-clear" class="btn btn-secundario" type="button">Vaciar carrito</button>
         <button id="cart-checkout" class="btn btn-primario" type="button">Finalizar compra</button>
         <a class="btn btn-secundario" href="productos.html">Seguir comprando</a>
       </div>
+
+      <!-- Recibo / Comprobante -->
+      <div id="receipt" style="display:none; margin-top:16px"></div>
     </section>
   </main>
 
-  <!-- ===== FOOTER (igual) ===== -->
   <footer>
     <div class="inner">
       <h3 class="footer-brand">TechNova Store</h3>
-      <nav aria-label="Categorías">
-        <ul class="footer-links">
-          <li><a href="categoryx.html">Category X</a></li>
-          <li><a href="categoryy.html">Category Y</a></li>
-          <li><a href="categoryz.html">Category Z</a></li>
-        </ul>
-      </nav>
-      <form class="suscripcion" action="#" method="post">
-        <label class="sr-only" for="email">Suscríbete</label>
-        <input id="email" type="email" placeholder="tu correo" required>
-        <button type="submit">Suscribirme</button>
-      </form>
+      <nav aria-label="Categorías"><ul class="footer-links"><li><a href="categoryx.html">Category X</a></li><li><a href="categoryy.html">Category Y</a></li><li><a href="categoryz.html">Category Z</a></li></ul></nav>
+      <form class="suscripcion" action="#"><label class="sr-only" for="email">Suscríbete</label><input id="email" type="email" placeholder="tu correo" required><button>Suscribirme</button></form>
     </div>
   </footer>
 
-  <!-- 👉 JS del carrito (render, sumar/restar, eliminar, total) -->
   <script src="js/app.js"></script>
 </body>
 </html>
