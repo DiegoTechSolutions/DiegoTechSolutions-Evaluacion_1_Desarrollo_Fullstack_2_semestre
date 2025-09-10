@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Vista responsive en celulares -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechNova Store - Home</title>
+  <!-- Hoja de estilos externa (buenas prácticas) -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER: logo + menú + carrito =====
+       Uso flex para poner todo en una sola línea. -->
+  <header>
+    <div class="logo">
+      <!-- LOGO (si no existe, usar un placeholder). Alt describe la imagen. -->
+      <img src="images/logo-tehnova.png" alt="Logo TechNova">
+      <h1>TechNova Store</h1>
+    </div>
+
+    <!-- Menú principal de navegación -->
+    <nav aria-label="Menú principal">
+      <ul class="menu">
+        <li><a class="activo" href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- Carrito: contador se actualizará con JS en otra fase -->
+    <div class="carrito" aria-label="Carrito de compras">
+      <img src="images/carrito-de-compras.png" alt="Carrito">
+      <span aria-live="polite">Cart (0)</span>
+    </div>
+  </header>
+
+  <!-- ===== NAV SECUNDARIO (login/registro) =====
+       Requisito de la pauta: accesos a iniciar sesión y registro.
+       Lo alineamos a la DERECHA con flex en CSS. -->
+  <nav class="nav-secundario" aria-label="Accesos de usuario">
+    <ul>
+      <li><a href="iniciarSesion.html">Iniciar sesión</a></li>
+      <li><a href="registrarUsuario.html">Registrar usuario</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- ===== HERO: mensaje principal + imagen =====
+         Grid simple (texto | imagen) que se apila en móvil. -->
+    <section class="hero">
+      <div class="hero-texto">
+        <h2>Innovación a un clic</h2>
+        <p>Encuentra gadgets y accesorios a buen precio, con envío rápido.</p>
+        <div class="hero-botones">
+          <a class="btn btn-primario" href="productos.html">Ver productos</a>
+          <a class="btn btn-secundario" href="nosotros.html">Conócenos</a>
+        </div>
+      </div>
+
+      <div class="hero-imagen">
+        <!-- MUY IMPORTANTE: usar ruta relativa "images/..." (sin barra inicial).
+             Si pones "/images/..." el navegador busca desde la raíz del servidor. -->
+        <img src="images/technova-2-e1732106172298.png" alt="Banner TechNova Store">
+      </div>
+    </section>
+
+    <!-- ===== PRODUCTOS DESTACADOS =====
+         Cards con imagen, nombre y precio (requisito de la HOME). -->
+    <section class="productos" aria-label="Productos destacados">
+
+      <!-- NOTA: evita nombres de archivo con espacios. Renombra a "teclado-mecanico.png" y actualiza aquí. -->
+
+      <article class="card">
+        <img src="images/mouse.png" alt="Mouse Gamer RGB">
+        <h3>Mouse Gamer RGB</h3>
+        <p class="precio">$15.990</p>
+        <a class="btn btn-negro" href="detalleProducto.html">Ver detalle</a>
+      </article>
+
+      <article class="card">
+        <img src="images/teclado mecanico.png" alt="Teclado Mecánico">
+        <h3>Teclado Mecánico</h3>
+        <p class="precio">$34.990</p>
+        <a class="btn btn-negro" href="detalleProducto.html">Ver detalle</a>
+      </article>
+
+      <article class="card">
+        <img src="images/audifonos.png" alt="Audífonos Bluetooth">
+        <h3>Audífonos Bluetooth</h3>
+        <p class="precio">$22.500</p>
+        <a class="btn btn-negro" href="detalleProducto.html">Ver detalle</a>
+      </article>
+
+      <article class="card">
+        <img src="images/smartwatch.png" alt="Smartwatch FitNova">
+        <h3>Smartwatch FitNova</h3>
+        <p class="precio">$29.990</p>
+        <a class="btn btn-negro" href="detalleProducto.html">Ver detalle</a>
+      </article>
+
+      <article class="card">
+        <img src="images/laptop.png" alt="Notebook Ultraliviano">
+        <h3>Notebook Ultraliviano</h3>
+        <p class="precio">$399.990</p>
+        <a class="btn btn-negro" href="detalleProducto.html">Ver detalle</a>
+      </article>
+
+      <article class="card">
+        <img src="images/silla.png" alt="Silla Gamer Ergonómica">
+        <h3>Silla Gamer Ergonómica</h3>
+        <p class="precio">$149.990</p>
+        <a class="btn btn-negro" href="detalleProducto.html">Ver detalle</a>
+      </article>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER =====
+       Lo ordeno con CSS Grid:
+       - Marca a la izquierda
+       - Links a la derecha
+       - Formulario abajo (debajo de la marca)
+       En móvil, todo apilado y centrado. -->
+  <footer>
+    <div class="inner">
+      <h3 class="footer-brand">TechNova Store</h3>
+
+      <nav aria-label="Categorías">
+        <ul class="footer-links">
+          <li><a href="categoryx.html">Category X</a></li>
+          <li><a href="categoryy.html">Category Y</a></li>
+          <li><a href="categoryz.html">Category Z</a></li>
+        </ul>
+      </nav>
+
+      <form class="suscripcion" action="#" method="post">
+        <label class="sr-only" for="email">Suscríbete al boletín</label>
+        <input id="email" type="email" placeholder="tu correo" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+    </div>
+  </footer>
+
+</body>
+</html>

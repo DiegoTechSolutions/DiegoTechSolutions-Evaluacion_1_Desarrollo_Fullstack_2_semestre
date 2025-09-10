@@ -1,0 +1,253 @@
+/* =========================================================
+   BASE (mobile-first)
+   - Reset mínimo y tipografía simple
+   - Todo parte pensando en celular y luego mejoro con media queries
+========================================================= */
+*{ box-sizing:border-box; margin:0; padding:0; }
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background:#f4f6f8;   /* gris muy claro para contraste */
+  color:#222;           /* texto oscuro, fácil de leer */
+  line-height:1.5;
+}
+img{ max-width:100%; display:block; } /* imágenes no se salen del contenedor */
+ul{ list-style:none; }                 /* quito viñetas por defecto */
+a{ text-decoration:none; color:inherit; } /* links sin subrayado */
+
+/* =========================================================
+   HEADER (logo + menú + carrito)
+   - Flex para alinear horizontal
+   - flex-wrap permite que baje a dos líneas en pantallas chicas
+========================================================= */
+header{
+  background:#1e88e5;  /* azul corporativo */
+  color:#fff;
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;      /* móvil: si no cabe, se parte en 2 líneas */
+}
+
+/* LOGO (imagen + nombre) */
+.logo{ display:flex; align-items:center; gap:8px; }
+.logo img{
+  width:40px; height:40px;
+  border-radius:50%;   /* círculo para verse más “marca” */
+  background:#fff; padding:4px;
+}
+.logo h1{ font-size:20px; }
+
+/* Menú principal */
+.menu{ display:flex; gap:10px; flex-wrap:wrap; }
+.menu a{
+  color:#fff;
+  padding:6px 10px;
+  border-radius:6px;
+}
+.menu a:hover{ background:#1565c0; } /* hover más oscuro */
+.menu .activo{ background:#0d63b0; }  /* marca la página actual */
+
+/* Carrito (contador lo haremos dinámico con JS después) */
+.carrito{ display:flex; align-items:center; gap:6px; }
+.carrito img{ width:24px; height:24px; }
+.carrito span{
+  background:#000;     /* pastilla negra simple */
+  color:#f1f1f1;
+  font-weight:bold;
+  padding:4px 8px;
+  border-radius:12px;
+  font-size:13px;
+}
+
+/* =========================================================
+   NAV SECUNDARIO (Iniciar sesión / Registrar)
+   - Barra separada del header
+   - Justificado a la DERECHA (requisito del usuario)
+========================================================= */
+.nav-secundario{
+  background:#e9edf2;
+  border-top:1px solid #d7dde5;
+  border-bottom:1px solid #d7dde5;
+}
+.nav-secundario ul{
+  padding:8px 16px;
+  display:flex; gap:10px; flex-wrap:wrap;
+  max-width:1100px; margin:0 auto;
+  justify-content:flex-end; /* 👉 alinea a la derecha */
+}
+.nav-secundario a{
+  background:#fff;
+  border:1px solid #d7dde5;
+  padding:6px 10px;
+  border-radius:6px;
+}
+.nav-secundario a:hover{ background:#f7f9fc; }
+
+/* =========================================================
+   HERO (mensaje + botones + imagen)
+   - En móvil: apilado (texto arriba, imagen abajo)
+   - En >=700px: 2 columnas (texto | imagen)
+========================================================= */
+.hero{
+  max-width:1100px;
+  margin:16px auto;
+  padding:16px;
+  background:#fff;
+  border:1px solid #e3e7ee;
+  border-radius:10px;
+
+  display:grid;
+  gap:14px;               /* móvil: apilado */
+}
+.hero-texto h2{ font-size:24px; margin-bottom:6px; }
+.hero-texto p{ color:#555; margin-bottom:12px; }
+.hero-botones{ display:flex; gap:10px; flex-wrap:wrap; }
+.btn{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:bold;
+  text-align:center;
+}
+.btn-primario{ background:#1e88e5; color:#fff; }
+.btn-primario:hover{ background:#1565c0; }
+.btn-secundario{ background:#f4f6f8; border:1px solid #d7dde5; color:#222; }
+.btn-secundario:hover{ background:#e9edf2; }
+.hero-imagen img{ border-radius:8px; }
+
+/* =========================================================
+   PRODUCTOS (grilla simple de cards)
+   - Mobile-first: 2 columnas
+   - En >=1000px: 3 columnas
+========================================================= */
+.productos{
+  max-width:1100px;
+  margin:16px auto 28px;
+  padding:0 16px;
+
+  display:grid;
+  gap:12px;
+  grid-template-columns: 1fr 1fr; /* 2 columnas en móvil */
+}
+.card{
+  background:#fff;
+  border:1px solid #e3e7ee;
+  border-radius:10px;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.card img{
+  width:100%;
+  height:150px;       /* alto fijo para que todas las cards se vean parejas */
+  object-fit:cover;   /* recorta imagen conservando proporción */
+  background:#eee;
+  border-radius:8px;
+}
+.card h3{ font-size:16px; }
+.precio{ color:#1e88e5; font-weight:bold; }
+.btn-negro{
+  background:#111; color:#fff;
+  padding:8px 10px;
+  border-radius:6px;
+  margin-top:auto;    /* botón pegado abajo */
+}
+.btn-negro:hover{ background:#333; }
+
+/* =========================================================
+   FOOTER (grid ordenado)
+   - Desktop: 2 columnas [brand | links] y la suscripción debajo de brand
+   - Móvil: apilado y centrado
+========================================================= */
+footer{
+  background:#222; color:#ddd; margin-top:20px;
+}
+footer .inner{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:16px;
+
+  display:grid; gap:12px;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "brand links"
+    "form  links";
+  align-items:center;
+}
+.footer-brand{ grid-area: brand; font-size:16px; }
+
+/* Links a la derecha */
+.footer-links{
+  grid-area: links;
+  display:flex; gap:10px; flex-wrap:wrap;
+  justify-content:flex-end;   /* 👉 a la derecha */
+}
+.footer-links a{ background:#333; padding:6px 10px; border-radius:6px; }
+.footer-links a:hover{ background:#444; }
+
+/* Formulario de suscripción debajo de la marca */
+.suscripcion{
+  grid-area: form;
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+.suscripcion input{
+  width:260px; max-width:100%;
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #444;
+  background:#111; color:#eee;
+}
+.suscripcion button{
+  padding:8px 12px;
+  border-radius:6px;
+  border:1px solid #444;
+  background:#333; color:#eee;
+}
+.suscripcion button:hover{ background:#3a3a3a; }
+
+/* Accesibilidad: etiqueta “solo para lectores de pantalla” */
+.sr-only{
+  position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);
+}
+
+/* Foco visible con teclado (TAB) */
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline:2px solid #1e88e5; outline-offset:2px;
+}
+
+/* =========================================================
+   BREAKPOINTS (mejoras progresivas)
+========================================================= */
+
+/* >= 700px: el hero pasa a 2 columnas (texto | imagen) */
+@media (min-width:700px){
+  .hero{
+    grid-template-columns: 1.2fr 1fr;
+    align-items:center;
+  }
+}
+
+/* >= 1000px: productos con 3 columnas */
+@media (min-width:1000px){
+  .productos{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* <= 700px: footer apilado y centrado (móvil) */
+@media (max-width:700px){
+  footer .inner{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "brand"
+      "links"
+      "form";
+    text-align:center;
+  }
+  .footer-links{ justify-content:center; }
+  .suscripcion{ justify-content:center; }
+}
